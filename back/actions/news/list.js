@@ -1,9 +1,13 @@
 module.exports = (server) => {
     return (req, res, next) => {
-        console.log('news list');
-        res.send({
-            'name': 'toto',
-            'username': 'tata'
+
+        fetch(server.tools.getApiUrl('Actualites'))
+        .then((resp) => resp.json())
+        .then(data => {
+            res.send(data.records);
+        }).catch(err => {
+            // Error :(
         });
-    }
+
+        };
 };
